@@ -1,0 +1,51 @@
+<div class="p-3" fxLayout="row">
+  <div fxFlex="100">
+    <h1>Bem vindo, {{user.name}}</h1>
+    <h3>Abaixo estão os veículos que você reservou</h3>
+  </div>
+</div>
+<div class="m-3" fxLayout="row wrap" rowWrap="50" fxLayoutGap="5px" fxLayoutAlign="space-between start">
+  <mat-card class="mb-3" *ngFor="let vehicle of vehicles" fxFlex="49">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>{{vehicle.model}}</mat-card-title>
+      <mat-card-subtitle>{{vehicle.brand}}</mat-card-subtitle>
+    </mat-card-header>
+
+
+    <img mat-card-image [src]="vehicle.image" alt="">
+
+    <div fxLayout="column">
+      <div style="text-align: center;" fxFlex="40">
+      </div>
+      <div fxFlex="60">
+        <div fxLayout="row">
+          <div fxFlex="33">
+            <mat-card-title>Valor do aluguel</mat-card-title>
+            <h2> {{vehicle.price | currency: 'BRL'}}/dia</h2>
+          </div>
+          <div fxFlex="33">
+            <mat-card-title>Ano do veículo</mat-card-title>
+            <h2> {{vehicle.year}}</h2>
+          </div>
+          <div fxFlex="33">
+            <mat-card-title>Quilometragem</mat-card-title>
+            <h2> {{vehicle.kilometers}}km</h2>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <mat-card-actions>
+      <button (click)="cancel(vehicle._id)" color="primary" mat-raised-button>CANCELAR
+        RESERVA</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div *ngIf="vehicles.length === 0" fxLayout="row">
+  <div style="text-align: center;" fxFlex="100">
+    <img style="width: 50%;height: 50%;" class="mx-auto" src="\assets\undraw_my_app_re_gxtj.svg" alt="">
+    <h1 class="my-4">VOCÊ NÃO POSSUI NENHUM VEÍCULO RESERVADO</h1>
+    <button routerLink="/dashboard/veiculos" color="accent" mat-raised-button>RESERVAR VEÍCULOS</button>
+  </div>
+</div>

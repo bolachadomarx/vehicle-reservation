@@ -1,0 +1,66 @@
+<div class="p-3" fxLayout="row">
+  <div fxFlex="100">
+    <h1>LISTAGEM DE VEÍCULOS</h1>
+    <h2>Aqui se encontram os veículos disponíveis para reserva.</h2>
+    <h4>Para reservar um veículo basta clicar no botão RESERVAR</h4>
+  </div>
+</div>
+<div class="m-3" fxLayout="row wrap" fxLayout.md="column" rowWrap="50" fxLayoutGap="5px"
+  fxLayoutAlign="space-between start">
+  <mat-card class="mb-3" *ngFor="let vehicle of vehicles" fxFlex="49" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>{{vehicle.model}}</mat-card-title>
+      <mat-card-subtitle>{{vehicle.brand}}</mat-card-subtitle>
+    </mat-card-header>
+    <div *ngIf="!vehicle.rentedBy" fxLayout="row" fxLayoutAlign="start start">
+      <div fxFlex="5" fxFlex.xs="10" fxFlex.sm="10">
+        <mat-icon style="vertical-align: -webkit-baseline-middle;" class="available">verified</mat-icon>
+      </div>
+      <div fxFlex="95" fxFlex.xs="90" fxFlex.sm="90">
+        <h2>
+          DISPONÍVEL
+        </h2>
+      </div>
+    </div>
+    <div *ngIf="vehicle.rentedBy" fxLayout="row" fxLayoutAlign="start start">
+      <div fxFlex="5" fxFlex.xs="10" fxFlex.sm="10">
+        <mat-icon style="vertical-align: -webkit-baseline-middle;" class="unavailable">new_releases</mat-icon>
+      </div>
+      <div fxFlex="95" fxFlex.xs="90" fxFlex.sm="90">
+        <h2>
+          INDISPONÍVEL
+        </h2>
+      </div>
+    </div>
+
+
+    <img mat-card-image [src]="vehicle.image" alt="">
+
+    <div fxLayout="column">
+      <div style="text-align: center;" fxFlex="40">
+      </div>
+      <div fxFlex="60">
+        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+          <div fxFlex="33" fxFlex.sm="100" fxFlex.xs="100">
+            <mat-card-title>Valor do aluguel</mat-card-title>
+            <h2> {{vehicle.price | currency: 'BRL'}}/dia</h2>
+          </div>
+          <div fxFlex="33" fxFlex.sm="100" fxFlex.xs="100">
+            <mat-card-title>Ano do veículo</mat-card-title>
+            <h2> {{vehicle.year}}</h2>
+          </div>
+          <div fxFlex="33" fxFlex.sm="100" fxFlex.xs="100">
+            <mat-card-title>Quilometragem</mat-card-title>
+            <h2> {{vehicle.kilometers}}km</h2>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <mat-card-actions>
+      <button [disabled]="vehicle.rentedBy" (click)="reserve(vehicle._id)" color="primary"
+        mat-raised-button>RESERVAR</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

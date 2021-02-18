@@ -1,0 +1,42 @@
+<div fxLayout="row" style="min-height: 80vh;" fxLayoutAlign="center center">
+  <mat-card fxFlex="50">
+    <mat-card-header>
+      <mat-card-title>Cadastro Happmobi Reservas</mat-card-title>
+      <mat-card-subtitle>Para acessar as outras funcionalidades do sistema você deve fazer o cadastro
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="column" [formGroup]="signupForm">
+        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+          <mat-label>Nome</mat-label>
+          <input type="text" formControlName="name" matInput>
+        </mat-form-field>
+        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+          <mat-label>Email</mat-label>
+          <input type="text" formControlName="email" matInput>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" [formGroup]=" passwordForm">
+        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+          <mat-label>Senha</mat-label>
+          <input type="password" formControlName="password" matInput>
+          <mat-hint>A senha deve conter no mínimo 8 caracteres e no máximo 25</mat-hint>
+          <mat-error *ngIf="passwordForm.hasError('passwordConfirmation') || passwordForm.hasError('different')">
+            A senha não apresenta os requisitos mínimos
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+          <mat-label>Confirmação da senha</mat-label>
+          <input [errorStateMatcher]="matcher" type="password" formControlName="passwordConfirmation" matInput>
+          <mat-error *ngIf="passwordForm.hasError('passwordConfirmation') || passwordForm.hasError('different')">
+            A confirmação de senha está incorreta
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)=" save()" color="primary" mat-raised-button>Cadastrar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
