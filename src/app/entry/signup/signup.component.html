@@ -7,17 +7,17 @@
     </mat-card-header>
     <mat-card-content>
       <div fxLayout="column" [formGroup]="signupForm">
-        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+        <mat-form-field class="w-100" fxFlex="100" appearance="outline">
           <mat-label>Nome</mat-label>
           <input type="text" formControlName="name" matInput>
         </mat-form-field>
-        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+        <mat-form-field class="w-100" fxFlex="100" appearance="outline">
           <mat-label>Email</mat-label>
           <input type="text" formControlName="email" matInput>
         </mat-form-field>
       </div>
       <div fxLayout="column" [formGroup]=" passwordForm">
-        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+        <mat-form-field class="w-100" fxFlex="100" appearance="outline">
           <mat-label>Senha</mat-label>
           <input type="password" formControlName="password" matInput>
           <mat-hint>A senha deve conter no mínimo 8 caracteres e no máximo 25</mat-hint>
@@ -25,7 +25,7 @@
             A senha não apresenta os requisitos mínimos
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+        <mat-form-field class="w-100" fxFlex="100" appearance="outline">
           <mat-label>Confirmação da senha</mat-label>
           <input [errorStateMatcher]="matcher" type="password" formControlName="passwordConfirmation" matInput>
           <mat-error *ngIf="passwordForm.hasError('passwordConfirmation') || passwordForm.hasError('different')">
