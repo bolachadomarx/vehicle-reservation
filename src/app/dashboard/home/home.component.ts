@@ -3,6 +3,7 @@ import { LoadingService } from './../../_helpers/loading.service'
 import { VehicleService } from './../../_services/vehicle.service'
 import { AuthenticationService } from 'src/app/_services/authentication.service'
 import { Component, OnInit } from '@angular/core'
+import { differenceInCalendarDays, parseISO } from 'date-fns'
 
 @Component({
   selector: 'app-home',
@@ -24,16 +25,20 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authenticationService.currentUserValue.user
-    this.vehicleService.get(null).subscribe((res: any) => {
+    this.vehicleService.get({}).subscribe((res: any) => {
       this.vehicles = res.filter((res) => res.rentedBy === this.user._id)
       this.loadingService.clearLoading()
     })
   }
 
   cancel(vehicleId) {
-    this.vehicleService.update(vehicleId, { rentedBy: null }).subscribe((res) => {
+    this.vehicleService.update(vehicleId, { rentedBy: null, rentDate: null }).subscribe((res) => {
       this.toastr.success('Reserva cancelada', 'Sucesso')
       this.ngOnInit()
     })
+  }
+
+  calculateDays(rentDate) {
+    return differenceInCalendarDays(parseISO(rentDate), new Date())
   }
 }

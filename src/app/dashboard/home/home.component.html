@@ -4,40 +4,48 @@
     <h3>Abaixo estão os veículos que você reservou</h3>
   </div>
 </div>
-<div class="m-3" fxLayout="row wrap" rowWrap="50" fxLayoutGap="5px" fxLayoutAlign="space-between start">
-  <mat-card class="mb-3" *ngFor="let vehicle of vehicles" fxFlex="49">
+<div class="m-3" fxLayout="row wrap" fxLayout.md="column" rowWrap="50" fxLayoutGap="5px"
+  fxLayoutAlign="space-between start">
+  <mat-card class="mb-3" *ngFor="let vehicle of vehicles" fxFlex="49" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
     <mat-card-header>
       <div mat-card-avatar class="header-image"></div>
       <mat-card-title>{{vehicle.model}}</mat-card-title>
       <mat-card-subtitle>{{vehicle.brand}}</mat-card-subtitle>
     </mat-card-header>
 
-
+    <h4>A reserva expira em {{calculateDays(vehicle.rentDate)}} dias</h4>
     <img mat-card-image [src]="vehicle.image" alt="">
 
     <div fxLayout="column">
       <div style="text-align: center;" fxFlex="40">
       </div>
       <div fxFlex="60">
-        <div fxLayout="row">
-          <div fxFlex="33">
-            <mat-card-title>Valor do aluguel</mat-card-title>
-            <h2> {{vehicle.price | currency: 'BRL'}}/dia</h2>
+        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+          <div fxFlex="33" fxFlex.sm="100" fxFlex.xs="100">
+            <mat-card-title style="color: gray;">
+              <mat-icon style="vertical-align: text-bottom;">attach_money</mat-icon> Valor do aluguel
+            </mat-card-title>
+            <h3> {{vehicle.price | currency: 'BRL'}}/dia</h3>
           </div>
-          <div fxFlex="33">
-            <mat-card-title>Ano do veículo</mat-card-title>
-            <h2> {{vehicle.year}}</h2>
+          <div fxFlex="33" fxFlex.sm="100" fxFlex.xs="100">
+            <mat-card-title style="color: gray;">
+              <mat-icon style="vertical-align: text-bottom;">toys</mat-icon> Ano do veículo
+            </mat-card-title>
+            <h3> {{vehicle.year}}</h3>
           </div>
-          <div fxFlex="33">
-            <mat-card-title>Quilometragem</mat-card-title>
-            <h2> {{vehicle.kilometers}}km</h2>
+          <div fxFlex="33" fxFlex.sm="100" fxFlex.xs="100">
+            <mat-card-title style="color: gray;">
+              <mat-icon style="vertical-align:text-bottom;">edit_road</mat-icon> Quilometragem
+            </mat-card-title>
+            <h3> {{vehicle.kilometers}}km</h3>
           </div>
         </div>
 
       </div>
     </div>
     <mat-card-actions>
-      <button (click)="cancel(vehicle._id)" color="primary" mat-raised-button>CANCELAR
+      <button [disabled]="vehicle.rentedBy !== user._id" (click)="cancel(vehicle._id)" color="primary"
+        mat-raised-button>CANCELAR
         RESERVA</button>
     </mat-card-actions>
   </mat-card>

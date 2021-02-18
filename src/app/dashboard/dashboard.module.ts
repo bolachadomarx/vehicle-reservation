@@ -8,10 +8,11 @@ import { HomeComponent } from './home/home.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { VehiclesComponent } from './vehicles/vehicles.component'
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { ConfirmReservationDialogComponent } from './_components/confirm-reservation-dialog/confirm-reservation-dialog.component'
 
 @NgModule({
-  declarations: [NavComponent, HomeComponent, VehiclesComponent],
+  declarations: [NavComponent, HomeComponent, VehiclesComponent, ConfirmReservationDialogComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(DashboardRoutes),

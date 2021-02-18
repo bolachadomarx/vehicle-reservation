@@ -15,4 +15,5 @@ export interface UpdateVehicleModel {
   rentedBy?: string
   price?: number
   kilometers?: number
+  rentDate?: Date
 }
